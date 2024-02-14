@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:graphql_flutter/graphql_flutter.dart';
+
 import 'package:my_grafql_app/refresh.dart';
 
 import 'package:smartrefresh/smartrefresh.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import 'anime_model.dart';
@@ -51,12 +54,12 @@ class _AnimeListPageState extends State<AnimeListPage> {
             ),
             builder: (result, {refetch, fetchMore}) {
               if (result.hasException) {
-                return Center(
+                return const Center(
                   child: Text("Nimadir hato berdi!"),
                 );
               }
               if (result.isLoading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -82,15 +85,16 @@ class _AnimeListPageState extends State<AnimeListPage> {
                             width: 10,
                           ),
                           TextButton(
-                              onPressed: () async{
-                                const url = 'https://blog.logrocket.com';
-                                if(await canLaunch(url)){
-                                  await launch(url);
-                                }else {
-                                  throw 'Could not launch $url';
-                                }
-                              },
-                              child: Text('${medias[index].siteUrl}')),
+                            onPressed: () async {
+                              const url = 'https://blog.logrocket.com';
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                            },
+                            child: Text('${medias[index].siteUrl}'),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -100,7 +104,7 @@ class _AnimeListPageState extends State<AnimeListPage> {
                     ],
                   );
                 },
-                separatorBuilder: (_, __) => SizedBox(
+                separatorBuilder: (_, __) => const SizedBox(
                   height: 12,
                 ),
                 itemCount: medias.length,
